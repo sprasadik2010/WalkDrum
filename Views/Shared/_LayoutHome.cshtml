@@ -1,0 +1,131 @@
+﻿@*Rfrnc :- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_portfolio&stacked=h*@
+
+
+
+@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WALKDRUM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    @Styles.Render("~/bundles/styles")
+    @Styles.Render("~/bundles/bootstrapcss")
+    @Styles.Render("~/bundles/jqueryuicss")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/scripts")
+    @*@Scripts.Render("~/bundles/angular")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        .form-control {
+            border-radius: 10px !important;
+        }
+
+            .form-control:hover, .form-control:focus {
+                border-bottom: solid 0.3em green;
+            }
+
+        .ui-timepicker-wrapper {
+            width: 73% !important;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            font-size: 1.5em;
+            line-height: 2em;
+        }
+
+        .wdlogo {
+            color: #ffff99 !important;
+            background-color: #ff0000 !important;
+        }
+
+            .wdlogo:hover {
+                color: #ffff99 !important;
+                background-color: #ff0000 !important;
+            }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: transparent;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: auto;
+        }
+    </style>
+
+</head>
+@{var actionName = ViewContext.RouteData.Values["action"].ToString(); }
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header wdlogo">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand wdlogo" onclick="javascript: return (false);"><span class="logocss">WALKDRUM</span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    @{
+                        if (actionName.ToLower() == "index" || actionName.ToLower() == "searchresults")
+                        {
+                            <li class="active"><a href="/">HOME</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/">HOME</a></li>
+                        }
+                    }
+                    @*@{
+                        if (actionName.ToLower() == "addwalkin")
+                        {
+                            <li class="active"><a href="/Home/addwalkin">ADD A WALKIN</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/Home/addwalkin">ADD A WALKIN</a></li>
+                        }
+                    }*@
+                    @{
+                        if (actionName.ToLower() == "contactus")
+                        {
+                            <li class="active"><a href="/Home/contactus">CONTACT US</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/Home/contactus">CONTACT US</a></li>
+                        }
+                    }
+
+
+                    @*<li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li>*@
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" onclick="return false;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <footer class="container-fluid text-center">
+        <p></p>
+    </footer>
+
+</body>
+
+
+</html>

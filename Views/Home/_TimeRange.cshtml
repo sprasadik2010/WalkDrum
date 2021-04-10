@@ -1,0 +1,28 @@
+﻿@model WalkDrum.Models.WalkInInfo
+<script>
+    $(document).ready(function () {
+        $('input.timepicker').timepicker({});
+    });
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.min.css" integrity="sha512-GgUcFJ5lgRdt/8m5A0d0qEnsoi8cDoF0d6q+RirBPtL423Qsj5cI9OxQ5hWvPi5jjvTLM/YhaaFuIeWCLi6lyQ==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.min.js" integrity="sha512-WHnaxy6FscGMvbIB5EgmjW71v5BCQyz5kQTcZ5iMxann3HczLlBHH5PQk7030XmmK5siar66qzY+EJxKHZTPEQ==" crossorigin="anonymous"></script>
+
+<div class="form-horizontal">
+    <h4 class="sessiontitle">TIME</h4>
+    <div class="form-group">
+        <h4 class="itemlabels">TIME FROM</h4>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.timefrom, "{0:hh\\:mm}", new { Class = "form-control timepicker" })
+            @*<input type="text" class="form-control" id="timefrom" />*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h4 class="itemlabels">TIME TO</h4>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.timeto, "{0:hh\\:mm}", new { Class = "form-control timepicker" })
+            @*<input type="text" class="form-control" id="timeto" />*@
+        </div>
+    </div>
+</div>

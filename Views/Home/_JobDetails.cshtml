@@ -1,0 +1,87 @@
+﻿@model WalkDrum.Models.WalkInInfo
+@{var tit = @System.Text.RegularExpressions.Regex.Replace(Model.jobtitle, @"[^0-9a-zA-Z]+", ""); }
+    <script type="text/javascript">
+    document.title = @tit;
+    </script>
+<style>
+    .jobtitle {
+        font: bold 1em arial verdana;
+        font-size: 2em;
+        color: darkcyan;
+        text-decoration: underline;
+    }
+
+    .jobdescription {
+        text-decoration: underline;
+        font: bold 1.2em arial verdana;
+        color: cornflowerblue;
+        font-style: italic;
+    }
+
+    @@media print {
+        .jobdescription {
+            break-after: always;
+        }
+    }
+
+    .det {
+        color: maroon;
+    }
+
+    .septr {
+        color: darkgray;
+    }
+</style>
+<div ng-app="myApp" ng-controller="myCtrl">
+    @*Posted on: @( (int)(DateTime.Today - Model.createdon).TotalDays) days ago
+        <br />
+        Views: @(Model.views)
+        <br />*@
+    <p><span class="jobtitle">@Model.jobtitle.ToUpper()</span></p>
+    @*<p><span class="jobtitle">{{model.jobtitle.toUpperCase()}}</span></p>*@
+    <span class="jobdescription">JOB DESCRIPTION</span> <p class="det">@Model.jobdescription</p>
+    @*<span class="jobdescription">JOB DESCRIPTION</span> <p class="det">{{model.jobdescription.toUpperCase()}}</p>*@
+    <span class="jobdescription">COMPANY NAME</span> <p class="det">@Model.companyinfo.CompanyName</p>
+    @*<span class="jobdescription">COMPANY NAME</span> <p class="det">{{model.companyinfo.CompanyName.toUpperCase()}}</p>*@
+    <span class="jobdescription">WALKIN DATE</span>
+    @*{{*ngvar = false as variable}}
+        <div *ngIf="isValid; then thenTemplateName else elseTemplateName">
+            Here is never showing
+        </div>*@
+
+    @if (Model.dtfrom.ToString("MMM dd, yyyy") ==
+        Model.dtto.ToString("MMM dd, yyyy"))
+    {
+        <p class="jdate det">
+            @Model.dtfrom.ToString("MMM dd, yyyy")
+
+        </p>
+    }
+    else
+    {
+        <p class="jdate det">
+            @Model.dtfrom.ToString("MMM dd, yyyy") <span class="septr">to</span> @Model.dtto.ToString("MMM dd, yyyy")
+
+        </p>
+    }
+
+
+
+
+    <span class="jobdescription">WALKIN TIME</span>
+    <p class="det">@Model.timefrom.ToString("hh:mm tt") <span class="septr">to</span> @Model.timeto.ToString("hh:mm tt")</p>
+    <span class="jobdescription">LOCATION:</span><p class="det">@Model.location.CityName</p>
+    <span class="jobdescription">VENUE:</span><p class="det">@Model.venue</p>
+    @if (!string.IsNullOrEmpty(Model.contactperson.Trim()))
+    {
+        <span class="jobdescription">CONTACT PERSON:</span><p class="det">@Model.contactperson</p>
+    }
+
+</div>
+
+@*<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.model = @Html.Raw(Json.Encode(Model));
+   });
+</script>*@

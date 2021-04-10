@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "SearchResults";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+@{
+    var keyword = Request.QueryString["keyword"];
+    var location = Request.QueryString["location"];
+    var datefrom = Request.QueryString["datefrom"];
+    var dateto = Request.QueryString["dateto"];
+}
+
+<script>
+    //$(function () {
+    //    $("#dtfrom,#dtto").datepicker({
+    //        dateFormat: "M dd, yy (D)",
+    //        yearRange: "-100:+0",
+    //        changeMonth: true,
+    //        changeYear: true
+    //    });
+    //});
+    function showjobdetails(id, jobtitle) {
+        window.location.href = "/Home/JobDetails/" + id + "/" + jobtitle;
+        //window.location.href = "/Home/JobDetails/" + jid;
+    }
+</script>
+
+<style>
+    .itemlabelsResults {
+        background-color: lightgreen;
+        border: 1px solid #00ff00;
+        border-radius: 1em;
+        padding: 0.5em;
+    }
+
+    .viewcount {
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        background-color: #ddd;
+        padding: 0.3em;
+        border-radius: 0.5em;
+    }
+
+    .itemlabelsNoResults {
+        background-color: orange;
+        border: 1px solid #ff0000;
+        border-radius: 1em;
+        padding: 0.5em;
+    }
+
+    .jobitem {
+        /*        background-color: ghostwhite;
+        border: 0.3em solid deepskyblue;
+        margin: 10px;
+        padding: 10px;
+        width: 18em;
+        height: 16em;
+        border-radius: 1em;
+        display: inline-table;*/
+        width: 100%;
+        border: solid 1px #e7e7e7;
+        padding: 5% 5% 3% 5%;
+        margin: 10px 0;
+        float: left;
+        border-radius: 8px;
+        box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
+        box-sizing: border-box;
+        background-color: floralwhite;
+    }
+
+        .jobitem:hover {
+            background-color: aquamarine;
+            cursor: pointer;
+            border-radius: 1em;
+        }
+
+    .title {
+        text-decoration: underline;
+        font-weight: bold;
+        color: #123499;
+    }
+
+    .company {
+        font-style: italic;
+        color: #35baab;
+    }
+
+    .city {
+        color: darkviolet;
+        font-weight: bold;
+        background-color: floralwhite;
+        width: fit-content;
+        margin: 0 auto;
+        padding: 0.2em 0.5em;
+        border-radius: 0.5em;
+    }
+
+    .row {
+        text-align: center;
+    }
+
+    .col-md-1 {
+        display: inline-block;
+    }
+
+    .jdate {
+        background-color: cornsilk;
+        font-weight: bold;
+        width: fit-content;
+        margin: 0 auto;
+        padding: 0.2em 0.5em;
+        border-radius: 0.2em;
+    }
+
+    .postedon {
+        text-align: right;
+        /* position: absolute; */
+        /* bottom: 0; */
+        /* background-color: #ddd; */
+        padding: 0.3em;
+        border-radius: 0.5em;
+        font-style: italic;
+        font-size: x-small;
+        font-weight: bold;
+    }
+</style>
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-2">
+                <input class="form-control" id="wdKey" placeholder="KEYWORD HERE ..." autocomplete="off" value="@keyword" />
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" id="wdLoc" placeholder="LOCATION HERE ..." autocomplete="off" value="@location" />
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" type="date" data-date-format="yyyy-MM-dd" id="dtfrom" placeholder="DATE FROM ..." autocomplete="off" value="@datefrom" />
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" type="date" data-date-format="yyyy-MM-dd" id="dtto" placeholder="DATE TO ..." autocomplete="off" value="@dateto" />
+            </div>
+            @*<div class="col-sm-2">
+                <input class="form-control" id="timefrom" placeholder="TIME FROM ..." />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" id="timeto" placeholder="TIME TO ..." />
+                </div>*@
+            <div class="col-sm-2">
+                <input type="submit" class="btn btn-success form-control" id="btnsearch" value="SEARCH" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-3 text-center" id="DivSearchResults">
+    @{Html.RenderAction("_SearchResults", new { keyword = keyword, location = location, datefrom = datefrom, dateto = dateto });}
+</div>
+@*<div class="container-fluid bg-3 text-center" id="DivSearchResults">
+    @{Html.RenderAction("_SearchResultLinks", new { keyword = keyword, location = location, datefrom = datefrom, dateto = dateto });}
+</div>*@
+
+
+<script>
+var url = '@Url.Action("_SearchResults", "Home")';
+    $('#btnsearch').click(function (e) {
+
+        var keyword = $('#wdKey').val();
+        var location = $('#wdLoc').val();
+        var datefrom = $('#dtfrom').val();
+        var dateto = $('#dtto').val();
+        e.preventDefault();
+        window.location = '@Url.Action("SearchResults", "Home")?keyword=' + keyword + '&location=' + location + '&datefrom=' + datefrom + '&dateto=' + dateto;
+        //$('#DivSearchResults').load(url, { keyword: keyword, location: location, datefrom: datefrom, dateto:dateto });
+    });
+
+</script>

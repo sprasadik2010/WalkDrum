@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+<script>
+    //$(function () {
+    //    $("#dtfrom,#dtto").datepicker({
+    //        dateFormat:"M dd, yy (D)",
+    //        yearRange: "-100:+0",
+    //        changeMonth: true,
+    //        changeYear: true
+    //    });
+    //});
+    function showjobdetails(id) {
+        window.location.href = "/Home/JobDetails?jid=" + id;
+    }
+</script>
+
+<style>
+    .jobitem {
+        border: 1px solid #ececec;
+        margin: 10px;
+        padding: 10px;
+    }
+
+        .jobitem:hover {
+            background-color: aquamarine;
+            cursor: pointer;
+            border-radius: 1em;
+        }
+
+    .row {
+        text-align: center;
+    }
+
+    .col-md-1 {
+        display: inline-block;
+    }
+</style>
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-2">
+                <input class="form-control" id="wdKey" placeholder="KEYWORD HERE ..." autocomplete="off" />
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" id="wdLoc" placeholder="LOCATION HERE ..." autocomplete="off" />
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" type="date" data-date-format="yyyy-MM-dd" id="dtfrom" placeholder="DATE FROM ..." autocomplete="off" />
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" type="date" data-date-format="yyyy-MM-dd" id="dtto" placeholder="DATE TO ..." autocomplete="off" />
+            </div>
+            @*<div class="col-sm-2">
+                <input class="form-control" id="timefrom" placeholder="TIME FROM ..." />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" id="timeto" placeholder="TIME TO ..." />
+                </div>*@
+            <div class="col-sm-2">
+                <input type="button" class="btn btn-success form-control" id="btnsearch" value="SEARCH" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-3 text-center" id="DivSearchResults">
+    <h2> Hello Job Seekers and Providers, We, WALKDRUM, provide you a great opportunity to search / show walkins at any specific location at any time within your prefered field.</h2>    
+</div>
+
+
+<script>
+var url = '@Url.Action("_SearchResults", "Home")';
+    $('#btnsearch').click(function (e) {
+
+        var keyword = $('#wdKey').val();
+        var location = $('#wdLoc').val();
+        var datefrom = $('#dtfrom').val();
+        var dateto = $('#dtto').val();
+        e.preventDefault();
+        window.location = '@Url.Action("SearchResults", "Home")?keyword=' + keyword + '&location=' + location + '&datefrom=' + datefrom +'&dateto='+dateto;
+        //$('#DivSearchResults').load(url, { keyword: keyword, location: location, datefrom: datefrom, dateto:dateto });
+})
+
+</script>

@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<style>
+    .green {
+    
+    color:green;
+    }
+    form, h2 {
+        padding: 1em;
+    }
+
+    h2 {
+        color: blue;
+    }
+
+    .session {
+        /*background-color: #e4ebec;*/
+        padding: 1em;
+    }
+
+        .session:nth-child(even) {
+            background: #def7f1;
+        }
+
+    .sessiontitle {
+        color: #ff00dc;
+        text-decoration: underline;
+    }
+
+    .itemlabels {
+        padding-left: 1em;
+    }
+
+    .highlight {
+        background-color: #FFFE43;
+    }
+</style>
+
+@using (Html.BeginForm("contactus", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="sessiontitle">CONTACT US</h4>
+
+
+        <div class="form-group">
+            <h4 class="itemlabels">Your Name</h4>
+            <div class="col-md-10">
+                @Html.TextBox("YourName", null, new { Class = "form-control" })
+                @*<div contenteditable="true" id="YourName" name="YourName" class="form-control"></div>*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="itemlabels">Your E-Mail</h4>
+            <div class="col-md-10">
+                @Html.TextBox("YourEmail", null, new { Class = "form-control" })
+                @*<div contenteditable="true" id="YourEmail" name="YourEmail" class="form-control"></div>*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="itemlabels">Message</h4>
+            <div class="col-md-10">
+                @Html.TextArea("Message", null, new { Class = "form-control" })
+                @*<div contenteditable="true" id="Message" name="Message" class = "form-control"></div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="session">
+        <button class="btn btn-primary">SEND</button>
+        @if (ViewBag.result == "success")
+        {
+            <span class="green">Thank you for yor feedback...</span>
+        }
+    </div>
+}

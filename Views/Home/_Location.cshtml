@@ -1,0 +1,21 @@
+﻿@model WalkDrum.Models.WalkInInfo
+<div class="form-horizontal">
+        <h4 class="sessiontitle">LOCATION</h4>
+        
+        
+        <div class="form-group">
+            <h4 class="itemlabels">COUNTRY NAME</h4>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.location.CountryName, new { Class = "form-control" })
+                @*<input type="text" class="form-control" id="CountryName" />*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="itemlabels">CITY NAME</h4>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.location.CityName, new { Class = "form-control" })
+                @*<input type="text" class="form-control" id="CityName" />*@
+            </div>
+        </div>
+    </div>

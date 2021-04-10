@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "JobDetails";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@model WalkDrum.Models.WalkInInfo
+
+<a href="http://www.facebook.com/sharer.php?u=@Request.Url.ToString()" title="share on facebook">Click to share on facebook</a>
+
+@Html.Partial("_JobDetails")
+

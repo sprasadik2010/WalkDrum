@@ -1,0 +1,67 @@
+﻿@model WalkDrum.Models.WalkInInfo
+
+@{
+    ViewBag.Title = "addwalkin";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<style>
+        form, h2 {
+            padding: 1em;
+        }
+
+        h2 {
+            color: blue;
+        }
+
+        /*    .session {
+            background-color: #e4ebec;
+            padding: 1em;
+        }
+
+            .session:nth-child(even) {
+                background: #def7f1;
+            }
+    */ .sessiontitle {
+            color: #ff00dc;
+            text-decoration: underline;
+        }
+
+        .itemlabels {
+            padding-left: 1em;
+        }
+
+        .highlight {
+            background-color: #FFFE43;
+        }
+
+        textarea {
+            height: 20em !important;
+        }
+</style>
+<script type="text/javascript">
+    window.onload = function (e) {
+        @Html.Raw(ViewBag.focusscript)
+    }
+
+
+</script>
+
+<h2>ADD WALKIN</h2>
+
+@using (Html.BeginForm("addwalkin", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="session">@Html.Partial("_WalkinInfo")</div>
+    <div class="session">@Html.Partial("_CompanyInfo")</div>
+    <div class="session">@Html.Partial("_DateRange")</div>
+    <div class="session">@Html.Partial("_TimeRange")</div>
+    <div class="session">@Html.Partial("_Location")</div>
+    <div class="session">@Html.Partial("_Venue")</div>
+
+    <div class="session">
+        <button class="btn btn-primary">ADD NOW</button>
+        @*<span class="red">@ViewBag.invalidfield</span>*@
+    </div>
+}

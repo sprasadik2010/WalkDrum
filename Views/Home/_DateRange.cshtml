@@ -1,0 +1,42 @@
+﻿@model WalkDrum.Models.WalkInInfo
+<script>
+    //$(document).ready(function () {
+    //    $('input.datepicker').datepicker({ dateFormat: 'dd-mm-yyyy'});
+    //});
+</script>
+<style>
+/*    input[type="date"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+*/</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous"></script>
+
+<div class="form-horizontal">
+    <h4 class="sessiontitle">DATES</h4>
+    <div class="form-group">
+        <h4 class="itemlabels">DATE FROM</h4>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.dtfrom, new { @type = "date", Class = "form-control datepicker", autocomplete = "off" })
+            @*<input type="text" class="form-control" id="dtfrom" />*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h4 class="itemlabels">DATE TO</h4>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.dtto, new { @type = "date", Class = "form-control datepicker", autocomplete = "off" })
+            @*<input type="text" class="form-control" id="dtto" />*@
+        </div>
+    </div>
+</div>

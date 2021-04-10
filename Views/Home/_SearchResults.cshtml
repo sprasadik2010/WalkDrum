@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WalkDrum.Models.WalkInInfo>
+    <script type="text/javascript">
+        document.title = '@(ViewBag.keyword + ", " + ViewBag.location)';
+    </script>
+
+@if (Model.Count() > 0)
+{
+    <h4 class="itemlabelsResults">
+        SEARCH RESULTS:
+        @if (!string.IsNullOrEmpty(ViewBag.keyword))
+        {
+            @("Key Word: " + ViewBag.keyword + ", ")
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.location))
+        {
+            @("Location " + ViewBag.location + ", ")
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.datefrom))
+        {
+            @("Date From: " + ViewBag.datefrom + ", ")
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.dateto))
+        {
+            @("Date To: " + ViewBag.dateto + ", ")
+        }
+    </h4>
+    <br>
+    <div class="row">
+        @foreach (WalkDrum.Models.WalkInInfo winfo in Model)
+        {
+            var tit = System.Text.RegularExpressions.Regex.Replace(winfo.jobtitle, @"[^0-9a-zA-Z]+", ""); 
+
+            <div class="col-sm-3 jobitem" onclick="showjobdetails(@winfo.id, '@tit')">
+                <h5 class="title">@winfo.jobtitle.Trim().ToUpper()</h5>
+                @if (winfo.dtfrom.ToString("MMM dd, yyyy") ==
+                    winfo.dtto.ToString("MMM dd, yyyy"))
+                {
+                    <p class="jdate">
+                        @(
+                            winfo.dtto.ToString("MMM dd, yyyy")
+                        )
+                    </p>
+                }
+                else
+                {
+                    <p class="jdate">
+                        @(
+                            winfo.dtfrom.ToString("MMM dd, yyyy") + " - " +
+                            winfo.dtto.ToString("MMM dd, yyyy")
+                        )
+                    </p>
+                }
+                <p class="company">@winfo.companyinfo.CompanyName</p>
+                <p class="city">@winfo.location.CityName.Trim().ToUpper()</p>
+                @{
+                    var postedon = winfo.createdon.ToString("MMM dd, yyyy");
+                    var postedbeforehrs = (double)(DateTime.Now - winfo.createdon).TotalHours;
+                    if (postedbeforehrs < 1)
+                    {
+                        postedon = "Just Now";
+                    }
+                    else if (postedbeforehrs < 24)
+                    {
+                        postedon = (int)Math.Floor(postedbeforehrs) + " hours ago";
+                    }
+                }
+                <p class="postedon">@(postedon)</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h4 class="itemlabelsNoResults">No results to show, that matches your search criteria !</h4>
+    <br>
+}
+
